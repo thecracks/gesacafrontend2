@@ -7,10 +7,10 @@
         </div>
         <div class="card-body">
           <div class="form-group">
-            <label for="dni">DNI</label>
-            <!--<input  id="dni" name="dni" class="form-control is-valid"-->
+            <label for="Dni">DNI</label>
+            <!--<input  id="Dni" name="Dni" class="form-control is-valid"-->
                    <!--placeholder="Enter Email.." autocomplete="email">-->
-            <input id="dni" [(ngModel)]="inputDni" (keydown.enter)="buscarAlumno()" class="form-control" placeholder="Ingresa DNI">
+            <input id="Dni" [(ngModel)]="inputDni" (keydown.enter)="buscarAlumno()" class="form-control" placeholder="Ingresa DNI">
 
             <div [style.color]="color">
               {{mensajeFeedback}}
@@ -42,32 +42,42 @@
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label>Dni</label>
-            <input type="text" formControlName="Dni" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.dni.errors }" />
-            <div *ngIf="submitted && f.dni.errors" class="invalid-feedback">
-              <div *ngIf="f.dni.errors.required">Dni es requerido</div>
+            <input type="text" formControlName="Dni" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.Dni.errors }" />
+            <div *ngIf="submitted && f.Dni.errors" class="invalid-feedback">
+              <div *ngIf="f.Dni.errors.required">Dni es requerido</div>
+              <div *ngIf="f.Dni.errors.minlength">DNI debe tener 8 digitos</div>
+              <div *ngIf="f.Dni.errors.maxlength">DNI debe tener 8 digitos</div>
             </div>
           </div>
           <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" formControlName="Nombre" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.Nombre.errors }" />
+            <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
+              <div *ngIf="f.Nombre.errors.required">Nombre es requerido</div>
+            </div>
+          </div>
+
+          <div class="form-group">
             <label>Apellido Paterno</label>
-            <input type="text" formControlName="paterno" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.paterno.errors }" />
-            <div *ngIf="submitted && f.paterno.errors" class="invalid-feedback">
-              <div *ngIf="f.paterno.errors.required">Apellido Paterno es requerido</div>
+            <input type="text" formControlName="Paterno" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.Paterno.errors }" />
+            <div *ngIf="submitted && f.Paterno.errors" class="invalid-feedback">
+              <div *ngIf="f.Paterno.errors.required">Apellido Paterno es requerido</div>
             </div>
           </div>
 
           <div class="form-group">
             <label>Apellido Materno</label>
-            <input type="text" formControlName="materno" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.materno.errors }" />
-            <div *ngIf="submitted && f.materno.errors" class="invalid-feedback">
-              <div *ngIf="f.materno.errors.required">Apellido Materno es requerido</div>
+            <input type="text" formControlName="Materno" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.Materno.errors }" />
+            <div *ngIf="submitted && f.Materno.errors" class="invalid-feedback">
+              <div *ngIf="f.Materno.errors.required">Apellido Materno es requerido</div>
             </div>
           </div>
 
           <div class="form-group">
             <label>Telefono</label>
-            <input type="text" formControlName="telefono" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
-            <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
-              <div *ngIf="f.telefono.errors.required">Teléfono es requerido</div>
+            <input type="text" formControlName="Telefono" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Telefono.errors }" />
+            <div *ngIf="submitted && f.Telefono.errors" class="invalid-feedback">
+              <div *ngIf="f.Telefono.errors.required">Teléfono es requerido</div>
             </div>
           </div>
           <!--<div class="form-group">

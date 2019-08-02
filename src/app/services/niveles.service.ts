@@ -1,18 +1,16 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Nivel } from "../interfaces/gesaca";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class NivelesService {
+  API_ENDPOINT = "http://localhost/gesacabackend/public/api";
 
-  API_ENDPOINT = 'http://localhost/gesacabackend/public/api';
-
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   get() {
-    return this.httpClient.get(this.API_ENDPOINT + '/nivels');
+    return this.httpClient.get(this.API_ENDPOINT + "/nivels");
   }
-
 }

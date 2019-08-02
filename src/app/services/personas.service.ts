@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Persona} from '../interfaces/persona';
+import {Persona} from '../interfaces/gesaca';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,10 @@ export class PersonasService {
 
   get() {
     return this.httpClient.get(this.API_ENDPOINT + '/personas');
+  }
+
+  getById(id: number) {
+    return this.httpClient.get(this.API_ENDPOINT + '/personas/' + id);
   }
 
   getByDni(dni: string) {

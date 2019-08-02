@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalDirective} from 'ngx-bootstrap/modal';
-import {Persona} from '../../interfaces/persona';
-import {Nivel} from '../../interfaces/nivel';
+import {Persona, Nivel} from '../../interfaces/gesaca';
 import {PersonasService} from '../../services/personas.service';
 import {NivelesService} from '../../services/niveles.service';
 import {Multidata} from '../../interfaces/multidata';
@@ -42,11 +41,11 @@ export class InscripcionComponent implements OnInit {
 
   loadForm() {
     this.registerForm = this.formBuilder.group({
-      Dni: [this.persona.Dni, [Validators.required, Validators.minLength(8)]],
-      nombre: [this.persona.Nombre, Validators.required],
-      paterno: [this.persona.Paterno, Validators.required],
-      materno: [this.persona.Materno, Validators.required],
-      telefono: [this.persona.Telefono, Validators.required]
+      Dni: [this.persona.Dni, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      Nombre: [this.persona.Nombre, Validators.required],
+      Paterno: [this.persona.Paterno, Validators.required],
+      Materno: [this.persona.Materno, Validators.required],
+      Telefono: [this.persona.Telefono, Validators.required]
     });
   }
 
@@ -56,6 +55,7 @@ export class InscripcionComponent implements OnInit {
 
       if (data.code_status == '1') {
         this.tituloModal = 'Alumno Encontrado';
+        console.log(data);
         this.persona = data.data as Persona;
         this.editing = true;
       } else {
@@ -125,15 +125,24 @@ export class InscripcionComponent implements OnInit {
     this.submitted = true;
 
     this.persona = this.registerForm.value;
-    alert(this.persona.Dni);
+    console.log(this.persona);
+   
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-      return;
+      // return;
+      alert('FAIL!! :-)');
+    } else {
+
+      this.persona.Tipo=1;
+      this.persona.Sub=1;
+
+      this.guardarAlumno();
+      alert('SUCCESS!! :-)');
     }
 
-    alert('SUCCESS!! :-)');
 
   }
 
+  
 
 }
