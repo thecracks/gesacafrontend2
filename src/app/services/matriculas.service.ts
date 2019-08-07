@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Matricula} from '../interfaces/gesaca';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Matricula } from '../interfaces/gesaca';
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +21,12 @@ export class MatriculasService {
   }
 
   save(matricula: Matricula) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.httpClient.post(this.API_ENDPOINT + '/matriculas', matricula, {headers: headers});
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpClient.post(this.API_ENDPOINT + '/matriculas', matricula, { headers: headers });
   }
 
   put(matricula: Matricula) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.httpClient.put(this.API_ENDPOINT + '/matriculas/' + matricula.IdMatricula, matricula, {headers: headers});
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpClient.put(this.API_ENDPOINT + '/matriculas/' + matricula.IdMatricula, matricula, { headers: headers });
   }
 }

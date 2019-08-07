@@ -9,8 +9,9 @@
           <div class="form-group">
             <label for="dni">DNI</label>
             <!--<input  id="dni" name="dni" class="form-control is-valid"-->
-                   <!--placeholder="Enter Email.." autocomplete="email">-->
-            <input id="dni" [(ngModel)]="inputDni" (keydown.enter)="buscarMatricula()" class="form-control" placeholder="Ingresa DNI">
+            <!--placeholder="Enter Email.." autocomplete="email">-->
+            <input id="dni" [(ngModel)]="inputDni" (keydown.enter)="buscarMatricula()" class="form-control"
+              placeholder="Ingresa DNI">
 
             <div [style.color]="color">
               {{mensajeFeedback}}
@@ -19,16 +20,20 @@
           </div>
         </div>
         <div class="card-footer">
-          <button (click)="buscarMatricula()" type="button" class="btn  btn-primary"  data-toggle="modal"><i class="fa fa-dot-circle-o"></i> Buscar</button>
+          <button (click)="buscarMatricula()" type="button" class="btn  btn-primary" data-toggle="modal"><i
+              class="fa fa-dot-circle-o"></i> Buscar</button>
           <button type="reset" name="reset" class="btn  btn-danger"><i class="fa fa-ban"></i> Limpiar</button>
         </div>
       </div>
-    </div><!--/.col-->
-  </div><!--/.row-->
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
 </div>
 
 
-<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-primary modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -40,85 +45,102 @@
       <div class="modal-body">
 
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
           <div class="form-group">
-              <label>Alumno</label>
-              <input type="text" value={{nombreAlumno}} class="form-control" disabled/>
+            <label>Alumno</label>
+            <input type="text" value="{{nombreAlumno}}" class="form-control" disabled />
           </div>
 
           <div class="form-group">
-            <label>Dni</label>
-            <input type="text" formControlName="dni" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.dni.errors }" />
-            <div *ngIf="submitted && f.dni.errors" class="invalid-feedback">
-              <div *ngIf="f.dni.errors.required">Dni es requerido</div>
-              <div *ngIf="f.dni.errors.minlength">DNI debe tener 8 digitos</div>
-              <div *ngIf="f.dni.errors.maxlength">DNI debe tener 8 digitos</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" formControlName="nombre" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
-            <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
-              <div *ngIf="f.nombre.errors.required">Nombre es requerido</div>
+            <label>Nivel</label>
+            <select class="custom-select" (change)="cambioNivel($event)" formControlName="IdNivel"
+              [ngClass]="{ 'is-invalid': submitted && f.IdNivel.errors }">
+              <option value="">Seleccione nivel ...</option>
+              <option *ngFor="let nivelx of niveles" [ngValue]="nivelx.IdNivel"
+                [selected]="nivelx.IdNivel === matricula.IdNivel">{{nivelx.Descripcion}}</option>
+            </select>
+            <div *ngIf="submitted && f.IdNivel.errors && f.IdNivel.value==''" class="invalid-feedback">
+              <div *ngIf="f.IdNivel.errors.required">Nivel es requerido</div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Apellido Paterno</label>
-            <input type="text" formControlName="paterno" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.paterno.errors }" />
-            <div *ngIf="submitted && f.paterno.errors" class="invalid-feedback">
-              <div *ngIf="f.paterno.errors.required">Apellido Paterno es requerido</div>
-            </div>
-          </div>
 
           <div class="form-group">
-            <label>Apellido Materno</label>
-            <input type="text" formControlName="materno" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.materno.errors }" />
-            <div *ngIf="submitted && f.materno.errors" class="invalid-feedback">
-              <div *ngIf="f.materno.errors.required">Apellido Materno es requerido</div>
+            <label>Grado</label>
+            <input type="text" formControlName="Grado" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.Grado.errors }" />
+            <div *ngIf="submitted && f.Grado.errors" class="invalid-feedback">
+              <div *ngIf="f.Grado.errors.required">Grado es requerido</div>
             </div>
           </div>
 
           <div class="form-group">
-            <label>Telefono</label>
-            <input type="text" formControlName="telefono" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
-            <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
-              <div *ngIf="f.telefono.errors.required">Teléfono es requerido</div>
+            <label>Seccion</label>
+            <input type="text" formControlName="Seccion" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.Seccion.errors }" />
+            <div *ngIf="submitted && f.Seccion.errors" class="invalid-feedback">
+              <div *ngIf="f.Seccion.errors.required">Seccion es requerido</div>
             </div>
           </div>
-          <!--<div class="form-group">
-            <label>Email</label>
-            <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-              <div *ngIf="f.email.errors.required">Email is required</div>
-              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-            </div>
-          </div>-->
-<!--          <div class="form-group">
-            <label>Password</label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-              <div *ngIf="f.password.errors.required">Password is required</div>
-              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-            </div>
-          </div>-->
-          <div class="form-group">
-            <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
 
+
+
+          <div class="form-group">
+            <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()"> Close</button>
             <button [disabled]="loading" class="btn btn-primary">Register</button>
           </div>
         </form>
 
       </div>
-<!--      <div class="modal-footer">
+      <!--      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
         <button (click)="guardarAlumno()" type="button" class="btn btn-primary">Save changes</button>
       </div>
       -->
 
       <!--<div class="modal-footer">-->
-        <!--<button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>-->
-        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      <!--<button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>-->
+      <!--<button type="button" class="btn btn-primary">Save changes</button>-->
       <!--</div>-->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div bsModal #mensajeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-primary modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{tituloModal}}</h4>
+        <button type="button" class="close" (click)="mensajeModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label>{{msgModal}}</label>
+          </div>
+
+          <div class="form-group">
+            <button type="button" class="btn btn-secondary" (click)="mensajeModal.hide()"> Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="goInscripcion()">Aceptar</button>
+          </div>
+        </form>
+
+      </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div>

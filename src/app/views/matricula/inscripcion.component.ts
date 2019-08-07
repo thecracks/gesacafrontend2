@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ModalDirective} from 'ngx-bootstrap/modal';
-import {Persona, Nivel} from '../../interfaces/gesaca';
-import {PersonasService} from '../../services/personas.service';
-import {NivelesService} from '../../services/niveles.service';
-import {Multidata} from '../../interfaces/multidata';
-import {Singledata} from '../../interfaces/singledata';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { Persona, Nivel } from '../../interfaces/gesaca';
+import { PersonasService } from '../../services/personas.service';
+import { NivelesService } from '../../services/niveles.service';
+import { Multidata } from '../../interfaces/multidata';
+import { Singledata } from '../../interfaces/singledata';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-inscripcion',
@@ -25,7 +25,7 @@ export class InscripcionComponent implements OnInit {
 
   editing = false;
 
-  constructor(private  personasService: PersonasService, private formBuilder: FormBuilder) {
+  constructor(private personasService: PersonasService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
@@ -126,15 +126,15 @@ export class InscripcionComponent implements OnInit {
 
     this.persona = this.registerForm.value;
     console.log(this.persona);
-   
+
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       // return;
       alert('FAIL!! :-)');
     } else {
 
-      this.persona.Tipo=1;
-      this.persona.Sub=1;
+      this.persona.Tipo = 1;
+      this.persona.Sub = 1;
 
       this.guardarAlumno();
       alert('SUCCESS!! :-)');
@@ -143,6 +143,6 @@ export class InscripcionComponent implements OnInit {
 
   }
 
-  
+
 
 }
